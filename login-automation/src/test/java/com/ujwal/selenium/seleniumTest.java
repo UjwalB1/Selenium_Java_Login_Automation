@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -35,6 +36,8 @@ public class seleniumTest {
 
         driver.findElement(By.cssSelector(".fa.fa-2x.fa-sign-in")).click();
         Thread.sleep(2000);
-        // Assert.
+        String actualResult = driver.findElement(By.cssSelector(".icon-2x.icon-signout")).getText();
+        String expectedResult = "Logout";
+        Assert.assertEquals(actualResult.trim(), expectedResult, "Verification failed: Logout text mismatch");
     }
 }

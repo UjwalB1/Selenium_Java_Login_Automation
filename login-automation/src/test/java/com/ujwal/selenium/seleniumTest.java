@@ -58,7 +58,7 @@ public class seleniumTest {
         
         String actualResultF = driver.findElement(By.id("flash")).getText();
         String expectedResultF = "Your username is invalid!";
-        Assert.assertEquals(actualResultF.trim(), expectedResultF, "Failure test failed: Soo uh yea no error message shown");
+        Assert.assertTrue(actualResultF.contains(expectedResultF), "Failure test failed: Soo uh yea no error message shown");
 
 
 

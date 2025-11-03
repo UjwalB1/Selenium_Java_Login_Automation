@@ -22,12 +22,13 @@ public class seleniumTest {
 
     @AfterClass
     public void tearDown() {
-        // driver.quit();
+        driver.quit();
     }
 
     @Test
     public void loggingIntoApplication() throws InterruptedException {
         Thread.sleep(2000);
+
         WebElement username = driver.findElement(By.id("username"));
         username.sendKeys("tomsmith");
 
@@ -36,8 +37,31 @@ public class seleniumTest {
 
         driver.findElement(By.cssSelector(".fa.fa-2x.fa-sign-in")).click();
         Thread.sleep(2000);
-        String actualResult = driver.findElement(By.cssSelector(".icon-2x.icon-signout")).getText();
-        String expectedResult = "Logout";
-        Assert.assertEquals(actualResult.trim(), expectedResult, "Verification failed: Logout text mismatch");
+        String actualResultP = driver.findElement(By.cssSelector(".icon-2x.icon-signout")).getText();
+        String expectedResultP = "Logout";
+        Assert.assertEquals(actualResultP.trim(), expectedResultP, "Verification failed: Logout text don't match twin");
     }
+
+
+    @Test
+    public void invalidLoginApplication() throws InterruptedException {
+        Thread.sleep(2000);
+
+        WebElement invalidUsername = driver.findElement(By.id("username"));
+        invalidUsername.sendKeys("DeffoNotNoTomSmithBroNotGonnaLie");
+
+        WebElement invalidPassword = driver.findElement(By.id("password"));
+        invalidPassword.sendKeys("AlsoDeffoTheWrongPasswordNotGonnaLie");
+
+        driver.findElement(By.cssSelector(".fa.fa-2x.fa-sign-in")).click();
+        Thread.sleep(2000);
+        
+        String actualResultF = driver.findElement(By.id("flash")).getText();
+        String expectedResultF = "Your username is invalid!";
+        Assert.assertEquals(actualResultF.trim(), expectedResultF, "Failure test failed: Soo uh yea no error message shown");
+
+
+
+    }
+
 }

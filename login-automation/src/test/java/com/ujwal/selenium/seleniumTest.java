@@ -29,6 +29,7 @@ public class seleniumTest {
     public void loggingIntoApplication() throws InterruptedException {
         Thread.sleep(2000);
 
+        // access elements and send input
         WebElement username = driver.findElement(By.id("username"));
         username.sendKeys("tomsmith");
 
@@ -36,6 +37,8 @@ public class seleniumTest {
         password.sendKeys("SuperSecretPassword!");
 
         driver.findElement(By.cssSelector(".fa.fa-2x.fa-sign-in")).click();
+
+        // verify test success
         Thread.sleep(2000);
         String actualResultP = driver.findElement(By.cssSelector(".icon-2x.icon-signout")).getText();
         String expectedResultP = "Logout";
@@ -47,6 +50,7 @@ public class seleniumTest {
     public void invalidLoginApplication() throws InterruptedException {
         Thread.sleep(2000);
 
+        // access elements and send input again
         WebElement invalidUsername = driver.findElement(By.id("username"));
         invalidUsername.sendKeys("DeffoNotNoTomSmithBroNotGonnaLie");
 
@@ -56,6 +60,7 @@ public class seleniumTest {
         driver.findElement(By.cssSelector(".fa.fa-2x.fa-sign-in")).click();
         Thread.sleep(2000);
         
+        // verify test success again
         String actualResultF = driver.findElement(By.id("flash")).getText();
         String expectedResultF = "Your username is invalid!";
         Assert.assertTrue(actualResultF.contains(expectedResultF), "Failure test failed: Soo uh yea no error message shown");
